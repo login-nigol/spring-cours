@@ -8,8 +8,12 @@
         http://www.springframework.org/schema/context/spring-context.xsd">
 
     <bean id="musicBean"
-          class="ru.vadim.models.RapMusic">
-<!--          <constructor-arg value="Vadim"/> // внедрение строки через конструктор-->
+          class="ru.vadim.models.ClassicalMusic">
+    </bean>
+
+    <bean id="musicPlayer"
+          class="ru.vadim.controllers.MusicPlayer">
+        <constructor-arg ref="musicBean"/>
     </bean>
 
 </beans>
