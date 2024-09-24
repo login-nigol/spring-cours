@@ -1,37 +1,23 @@
 package ru.vadim;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ru.vadim.controllers.MusicPlayer;
-import ru.vadim.services.Music;
+import ru.vadim.models.ClassicalMusic;
+import ru.vadim.models.RapMusic;
 
 public class TestSpring {
     public static void main(String[] args) {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
                 "applicationContext.xml"
         );
-        // ручное внедрение зависимости musicBean через конструктор
-        // Music music = context.getBean("musicBean", Music.class);
-        // MusicPlayer musicPlayer = new MusicPlayer(music);
 
-        MusicPlayer firstmusicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
-        MusicPlayer secondmusicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
+        ClassicalMusic classicalMusic = context.getBean("musicBean1", ClassicalMusic.class);
 
-        firstmusicPlayer.playMusicList();
+        System.out.println(classicalMusic.getSong());
 
-        boolean comparison = firstmusicPlayer == secondmusicPlayer;
+        RapMusic rapMusic = context.getBean("musicBean2", RapMusic.class);
 
-        System.out.println(comparison);
+        System.out.println(rapMusic.getSong());
 
-        System.out.println(firstmusicPlayer);
-        System.out.println(secondmusicPlayer);
-
-        firstmusicPlayer.setVolume(10);
-
-        System.out.println(firstmusicPlayer.getVolume());
-        System.out.println(secondmusicPlayer.getVolume());
-
-//        System.out.println(musicPlayer.getName());
-//        System.out.println(musicPlayer.getVolume());
         context.close();
     }
 }
